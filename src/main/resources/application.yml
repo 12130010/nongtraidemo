@@ -1,4 +1,3 @@
-#MongoDB
 spring:
   data:
     mongodb:
@@ -7,3 +6,9 @@ spring:
       password: P@ssword123
       database: nongtrai
       port: 27017
+  http:
+    multipart:
+      location: E:\nongtraidemo\uploaded\
+      enabled: true
+      max-file-size: 25MB
+      max-request-size: 25MB
