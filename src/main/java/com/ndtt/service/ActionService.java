@@ -25,7 +25,7 @@ public class ActionService {
 	public Action create(SingleUnit singleUnit, Action action) {
 		action = actionRepository.save(action);
 		singleUnit.addAction(action);
-		unitService.create(singleUnit);
+		unitService.update(singleUnit);
 		return action;
 
 	}

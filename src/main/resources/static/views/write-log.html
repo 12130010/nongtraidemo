@@ -1,0 +1,15 @@
+<div class="text-center">
+	<div class="col-xs-12">
+		<div class="col-xs-12">
+			<h2>Data: {{qrData.text}}</h2>
+		</div>
+		
+		<div class="col-xs-12">
+			<a ng-repeat="action in actions" class="btn btn-primary" style="margin: 5;" 
+				ng-click="chooseAcction(action)">{{action.text}}</a>
+		</div>
+		
+		<img id="capturedImage" style="height:200px;width:200px" ng-show="showImage"></img>
+		<input ng-show="showImage"></input>
+	</div>
+</div>

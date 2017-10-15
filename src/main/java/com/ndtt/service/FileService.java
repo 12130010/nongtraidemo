@@ -15,8 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileService {
-
-	@Value("${spring.http.multipart.location}")
+	@Value("${config.filePath}")
 	private String pathString;
 
 	public String save(MultipartFile file) throws URISyntaxException, IOException {

@@ -21,9 +21,23 @@ public class UnitService {
 	public SingleUnit create(SingleUnit unit) {
 		return unitRepository.save(unit);
 	}
-
+	public SingleUnit create(SingleUnit unit, String unitParentId) {
+		SingleUnit parentUnit = unitRepository.findOne(unitParentId);
+		unit = unitRepository.save(unit);
+		
+		parentUnit.addChild(unit);
+		unitRepository.save(parentUnit);
+		
+		return unit;
+	}
+	
 	public SingleUnit get(String id) {
 		return unitRepository.findOne(id);
+	}
+	
+	public SingleUnit update(SingleUnit singleUnit) {
+		return unitRepository.save(singleUnit);
+		
 	}
 
 	public List<SingleUnit> getByUserIdAndLevel(List<String> userIds, int level, int page, int size) {
