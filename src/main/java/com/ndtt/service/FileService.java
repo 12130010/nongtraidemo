@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileService {
+
 	@Value("${spring.http.multipart.location}")
 	private String pathString;
 
@@ -43,7 +44,7 @@ public class FileService {
 	}
 
 	public boolean delete(String fileName) {
-		File file = new File(pathString + fileName);
+		File file = new File(pathString, fileName);
 		return file.delete();
 	}
 
