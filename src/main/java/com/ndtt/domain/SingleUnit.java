@@ -15,12 +15,13 @@ import lombok.Data;
 @Document(collection = "unit")
 public class SingleUnit {
 	@Id
-	protected String id;
-	protected String name;
-	protected String address;
-	protected int level;
-	protected List<String> owners;
-	protected Coordinates coordinate;
+	private String id;
+	private String name;
+	private String address;
+	private String type;
+	private int level;
+	private List<String> owners;
+	private Coordinates coordinate;
 	@DBRef
 	@CascadeSave
 	private List<SingleUnit> childUnits;
@@ -46,9 +47,11 @@ public class SingleUnit {
 
 	@Override
 	public String toString() {
-		return "SingleUnit [actions=" + actions + ", getName()=" + getName() + ", getAddress()=" + getAddress()
-				+ ", getLevel()=" + getLevel() + ", getOwners()=" + getOwners() + ", getCoordinate()=" + getCoordinate()
-				+ ", getChildUnits()=" + getChildUnits() + ", getClass()=" + getClass() + "]";
+		return "SingleUnit [id=" + id + ", name=" + name + ", address=" + address + ", type=" + type + ", level="
+				+ level + ", owners=" + owners + ", coordinate=" + coordinate + ", childUnits=" + childUnits
+				+ ", actions=" + actions + "]";
 	}
+
+	
 	
 }

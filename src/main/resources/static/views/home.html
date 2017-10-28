@@ -70,6 +70,7 @@
 	   options="{nodeChildren : 'childUnits'}">
 	   	{{node.name}}
 	</treecontrol>
+	<button>Thêm trang trại</button>
 </div>
 <div class="col-xs-9">
 	<div ng-if="selectedNode">
@@ -77,10 +78,12 @@
 		<h2>Địa chỉ: {{selectedNode.address}}</h2>
 		<h2>Người sở hữu: {{selectedNode.owners}}</h2>
 		<button ng-click="prepareNewChildUnit()">Thêm đơn vị</button>
-		<button>Update đơn vị</button>
+		<button ng-click="prepareUpdateSelectedUnit()">Update đơn vị</button>
+<!-- 		<button ng-click="deleteUnit()">Xóa đơn vị</button> -->
 	</div>
 	
 	<div ng-if="isAddNewChildUnit">
+		<h1>Chi tiết đơn vị</h1>
 		<label>Tên đơn vị: </label>
 		<input ng-model="newUnit.name"/>
 		<br/>
@@ -90,7 +93,7 @@
 		<label>Người sở hữu: </label>
 		<input ng-model="newUnit.owners"/>
 		<br/>
-		<button ng-click="addNewChildUnit()">Thêm</button>
+		<button ng-click="addNewChildUnit()">{{ newUnit.id ? "Update" : "Thêm"}}</button>
 		<button ng-click="closeNewChildUnit()">Đóng</button>
 	</div>
 	

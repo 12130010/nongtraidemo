@@ -28,29 +28,45 @@ var homeController = function ($state, $scope, unitService, Lightbox){
 		$scope.isAddNewChildUnit = true;
 	};
 	
+	/*
+	 * Update or add. If newUnit has id, we update exist unit.
+	 */
 	$scope.addNewChildUnit = function () {
 		var self = $scope;
 		//split into array
 		self.newUnit.owners = angular.isArray(self.newUnit.owners) ? self.newUnit.owners : self.newUnit.owners.split(",");
 		
-		// parent level + 1
-		self.newUnit.level = self.selectedNode.level+1;
-		
-		unitService.addUnit(self.newUnit, self.selectedNode.id).then( function (newUnit) {
-			if (!self.selectedNode.childUnits)
-				self.selectedNode.childUnits = [];
-			self.selectedNode.childUnits.push(newUnit);
-			self.closeNewChildUnit();
-		});
-		
+		if(self.newUnit.id) { //has id => update
+			unitService.updateUnit(self.newUnit).then( function (newUnit) {
+				self.closeNewChildUnit();
+				self.loadTreeData(); // reload all
+			});
+		} else {
+			// parent level + 1
+			self.newUnit.level = self.selectedNode.level+1;
+			
+			unitService.addUnit(self.newUnit, self.selectedNode.id).then( function (newUnit) {
+				if (!self.selectedNode.childUnits)
+					self.selectedNode.childUnits = [];
+				self.selectedNode.childUnits.push(newUnit);
+				self.closeNewChildUnit();
+			});	
+		}
 	};
 	
 	$scope.closeNewChildUnit = function () {
 		$scope.isAddNewChildUnit = false;
 	};
 	
-	 $scope.openLightboxModal = function (imageLinks, index) {
+	$scope.prepareUpdateSelectedUnit = function () {
+		var self = $scope;
+		
+		self.newUnit = self.selectedNode;
+		$scope.isAddNewChildUnit = true;
+	}
+	
+	$scope.openLightboxModal = function (imageLinks, index) {
 	    Lightbox.openModal(imageLinks, index);
-	  };
+	};
 	init();
 }

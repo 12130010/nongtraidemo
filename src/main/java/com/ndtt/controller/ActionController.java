@@ -26,7 +26,7 @@ public class ActionController {
 	@Autowired
 	ActionService actionService;
 
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/")
 	public @ResponseBody ResponseEntity<?> create(MultipartHttpServletRequest request, Principal principal,
 			Locale locale) {
 		String unitId = request.getParameter("unitId");

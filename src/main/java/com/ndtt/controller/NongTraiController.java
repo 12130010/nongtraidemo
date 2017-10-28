@@ -18,7 +18,7 @@ public class NongTraiController {
 	@Autowired
 	UnitService unitSetvice;
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@RequestMapping(value="/init", method = RequestMethod.GET)
 	public @ResponseBody SingleUnit initUnit() {
 		return new SingleUnit();
 	}
@@ -26,6 +26,11 @@ public class NongTraiController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public @ResponseBody SingleUnit createUnit(@RequestBody SingleUnit unit, @RequestParam(defaultValue = "") String unitParentId) {
 		return unitSetvice.create(unit, unitParentId); 
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public @ResponseBody SingleUnit updateUnit(@RequestBody SingleUnit unit) {
+		return unitSetvice.update(unit); 
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -21,6 +21,10 @@ var commonModule = angular.module('commonModule', [])
 		"UNIT_ADD" : {
 			"baseUrl" : "unit/?unitParentId={0}",
 			"params" : ["unitParentId"]
+		},
+		"UNIT_UPDATE" : {
+			"baseUrl" : "unit/{0}",
+			"params" : []
 		}
 	}
 	
@@ -279,7 +283,7 @@ var commonModule = angular.module('commonModule', [])
 			});
 			
 			return deferred.promise;
-		}
+		};
 		
 		/**
 		 * Main function, which call the underline connector
@@ -308,7 +312,37 @@ var commonModule = angular.module('commonModule', [])
 			});
 			
 			return deferred.promise;
+		};
+		
+		/**
+		 * Main function, which call the underline connector
+		 * @param 	{object}		params 					input for executing actions, which has properties:
+		 * @param 	{string}		params.actionName 		the action which connector need to execute
+		 * @param 	{array}			params.actionParams 	array of actionParams
+		 * @param 	{object}		params.data 			data send for post action (optional)
+		 * @return an Angular Promise instance
+		 */
+		ConnectorService.prototype.put = function post(param){
+			var self = this;
+			var deferred = $q.defer();
+			
+			$log.debug("Call with actionName: " + param.actionName + ", and actionParams: " + param.actionParams);
+			$log.debug(param.data);
+			
+			self.showLoadingBar();
+			$http.put(commonService.getUrl(commonService.urlMap[param.actionName], param.actionParams), param.data).then( function success( response ){
+				$log.debug(response);
+				self.hideLoadingBar();
+				deferred.resolve(response);
+			}, function fail(response){
+				$log.debug(response);
+				self.hideLoadingBar();
+				deferred.reject(response);
+			});
+			
+			return deferred.promise;
 		}
+		
 		/**
 		 * Main function, which call the underline connector
 		 * @param 	{object}		params 					input for executing actions, which has properties:

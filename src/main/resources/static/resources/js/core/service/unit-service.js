@@ -52,6 +52,22 @@ app.service('unitService', ['$q', 'commonService', 'connectorService', function(
 		
 		return deferred.promise; 
 	};
+	UnitService.prototype.updateUnit = function updateUnit(unit){
+		var self = this;
+		var deferred = $q.defer();
+		
+		connectorService.put(
+				{
+					actionName: "UNIT_UPDATE",
+					actionParams : [unit.id],
+					data : unit
+				}
+		).then(function success(response){
+			deferred.resolve(response.data);
+		});
+		
+		return deferred.promise; 
+	};
 	
 	return new UnitService();
 }]);

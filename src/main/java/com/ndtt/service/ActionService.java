@@ -2,6 +2,7 @@ package com.ndtt.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class ActionService {
 			return null;
 		List<String> fileNames = fileService.save(files);
 		Coordinates coordinates = new Coordinates(longtitude, latitude);
+		action.setDate(new Date());
 		action.setActionType(actionType);
 		action.setActor(userId);
 		action.setCoordinate(coordinates);
